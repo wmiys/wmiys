@@ -1,6 +1,6 @@
 import requests
 from enum import Enum
-from wmiys.common import keys
+from wmiys import keys
 from wmiys.config import Production as ConfigProduction
 
 #------------------------------------------------------

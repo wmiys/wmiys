@@ -10,7 +10,7 @@ import stripe
 import uuid
 from http import HTTPStatus
 
-from wmiys.common import keys
+from wmiys import keys
 
 from wmiys.gui.other import security
 from wmiys.gui.payments import payments

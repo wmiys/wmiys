@@ -2,7 +2,7 @@ from __future__ import annotations
 import flask
 from enum import Enum
 from datetime import datetime, timedelta
-from other import utilities
+from wmiys.common import utilities
 from ..api_wrapper import ApiWrapperRequests, ApiWrapperRequestsSubmitted
 
 
