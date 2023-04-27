@@ -18,3 +18,4 @@ ConfigDev.SECRET_KEY_GUI                  = b'SEXn773P7GF7I4kbaD/RUNNh86jg7R6SoB
 ConfigDev.URL_API = 'http://10.0.0.82:5000'
 ConfigDev.URL_GUI = 'http://10.0.0.82:8000'
 ConfigDev.DB_NAME = 'wmiys_dev'
+ConfigDev.DB_HOST = ConfigPrivate.DB_HOST_IP

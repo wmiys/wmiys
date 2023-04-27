@@ -10,7 +10,7 @@
 #************************************************************************************
 
 from flask.json.provider import DefaultJSONProvider
-from datetime import date
+from datetime import date, datetime, timedelta
 from decimal import Decimal
 
 class CustomJSONEncoder(DefaultJSONProvider):
@@ -20,16 +20,18 @@ class CustomJSONEncoder(DefaultJSONProvider):
 
     @staticmethod
     def default(obj):
+        
         try:
-            if isinstance(obj, date):
+            if isinstance(obj, (datetime, date)):
                 return obj.isoformat()
             elif isinstance(obj, Decimal):
                 return float(obj)
-            iterable = iter(obj)
+            elif isinstance(obj, timedelta):
+                return timedelta.__str__
         except TypeError:
             pass
-        else:
-            return list(iterable)
-        
+
         return DefaultJSONProvider.default(obj)
+        
+        
         

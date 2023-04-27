@@ -49,6 +49,8 @@ def submittedRequests():
     api = ApiWrapperUsers(flask.g)
     user_api_response = api.get()
 
+    print('sup')
+
     if not user_api_response.ok:
         flask.abort(400)
     

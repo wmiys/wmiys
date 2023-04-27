@@ -24,8 +24,9 @@ from flask import Flask
 from flask_cors import CORS
 from wmiys import config
 import pymysql
-from wmiys.api.other import CustomJSONEncoder, images
+from wmiys.api.other import images
 from . import routes
+from wmiys.common import CustomJSONEncoder
 
 #----------------------------------------------------------
 # Sets up and initializes the flask application (NEW WAY)
@@ -41,7 +42,7 @@ def configureApp(flask_app: Flask):
     CORS(flask_app)
 
     # setup the custom encoder for dates
-    flask_app.json_provider_class = CustomJSONEncoder
+    flask_app.json = CustomJSONEncoder(flask_app)
 
     configureStaticUrl(flask_app)
     configureDatabaseConnection(flask_app)
