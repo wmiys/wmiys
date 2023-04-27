@@ -1,7 +1,7 @@
 import requests
 from enum import Enum
 from wmiys.common import keys
-from wmiys.common.config import Production as ConfigProduction
+from wmiys.config import Production as ConfigProduction
 
 #------------------------------------------------------
 # Prefix for the api url

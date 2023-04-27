@@ -6,7 +6,7 @@ import flask
 import stripe
 
 from wmiys.common import keys
-from wmiys.common.config import Production as ConfigProduction
+from wmiys.config import Production as ConfigProduction
 
 from .. import api_wrapper
 
