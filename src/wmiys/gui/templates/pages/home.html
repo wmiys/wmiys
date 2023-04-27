@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% include 'includes/header.html' %}
+    <title>WMIYS</title>
+</head>
+
+<body>
+    {% include 'includes/navbar.html' %}
+
+    <!-- search bar -->
+    <div class="card-home-wrapper">
+        <div class="card bg-dark text-white card-home-search-hero rounded-0">
+            <!-- background image -->
+            <img src="/static/img/home-search-bg-img.jpg" class="card-img" alt="Beach vacation rentals">
+
+            <div class="card-img-overlay">
+                <div class="container h-100 d-flex flex-column justify-content-center">
+
+                    <div>
+                        <h1 class="title">Vacation just got a whole lot better</h1>
+                        <h4 class="sub-title mb-3">Find your perfect rental today</h4>
+
+                        <div class="search-bar mt-2 p-3 p-lg-1 pl-lg-4">
+                            <form id="product-search-form">
+                                <div class="form-row align-items-center">
+                                    <!-- location -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <select class="form-control product-search-form-input border-0 shadow-0" id="product-search-form-input-location" placeholder="Search">
+                                                <option></option>
+                                            </select>
+                                            <div class="invalid-feedback">Invalid feedback text</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- date range -->
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control product-search-form-input border-0 shadow-none" id="product-search-form-input-dates" placeholder="Dates">
+                                        </div>
+                                    </div>
+
+                                    <!-- product category sub -->
+                                    <div class="col-md-2">
+                                        <div class="form-group form-group-no-divider">
+                                            <div class="dropdown" id="product-search-form-input-category" data-product-category-sub-id="-1">
+                                                <button class="btn btn-outline-light text-dark border-0 shadow-none" type="button" data-toggle="dropdown">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div id="product-search-form-input-category-text">All categories</div>
+                                                        <div><i class='bx bxs-chevron-down'></i></div>
+                                                    </div>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div><button type="button" class="btn btn-primary rounded-pill" id="product-search-form-button-search" disabled>Search</button></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="bg-gray py-5">
+        <div class="container pt-lg-3">
+            
+            <div class="text-center pb-lg-2">
+                <div class="subtitle text-secondary">One-of-a-kind vacation rentals</div>
+                <h2 class="mb-5">Booking with us is easy</h2>
+            </div>
+
+            <div class="row text-center">
+
+                <div class="col-lg-4 my-3 mb-lg-0">
+                    <div class="icon-rounded home-icon">
+                        <i class='bx bx-search'></i>
+                    </div>
+                        
+                    <h3 class="h4">Find the perfect rental</h3>
+                    <p class="text-muted">Skip the gear shop and find the perfect vacation rental to complement your get-a-way vibe.</p>
+                </div>
+
+                <div class="col-lg-4 my-3 mb-lg-0">
+                    <div class="icon-rounded home-icon">
+                        <i class='bx bxs-credit-card' ></i>
+                    </div>
+
+                    <h3 class="h4">Book with confidence</h3>
+                    <p class="text-muted">You choose where you want your items delivered.</p>
+                </div>
+
+                <div class="col-lg-4 my-3 mb-lg-0 mt-3">
+                    <div class="icon-rounded home-icon">
+                        <i class='bx bxs-heart' ></i>
+                    </div>
+
+                    <h3 class="h4">Enjoy your vacation</h3>
+                    <p class="text-muted">Save some cash by renting for a fraction of the cost.</p>
+                </div>        
+
+            </div>
+
+        </div>
+    </section>
+
+
+    {% include 'includes/footer.html' %}
+    
+    <script src="/static/js/dist/home.bundle.js"></script>
+</body>
+
+</html>
