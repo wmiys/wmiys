@@ -1,0 +1,113 @@
+{#
+***************************************************************************************************
+
+* Template: overview.html
+* URL: /products
+* Purpose: To display all the product requests a lender has received
+
+***************************************************************************************************
+
+Input parms -> data (list):
+    - id
+    - email
+    - name_first
+    - name_last
+    - birth_date
+    - created_on
+    - count_products
+    - count_agreements
+    - lender_balance
+***************************************************************************************************
+#}
+
+
+{% extends "pages/products/base.html" %}
+{% block title %}Lender Overview{% endblock %}
+
+
+{% block content %}
+
+
+<h1>Overview</h1>
+
+
+<div class="row">
+    <!-- product count -->
+    <div class="col-sm-12 col-md-6">
+        <div class="card card-products-overview">
+            <div class="card-body">
+                <div>
+                    <div class="card-products-overview-stat"    data-countup-value="{{ data.count_products }}">0</div>
+                    <div class="text-muted">Products</div>
+                </div>
+                    
+                <div class="icon-rounded home-icon mb-0">
+                    <i class='bx bx-buoy'></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- count accepted requests -->
+    <div class="col-sm-12 col-md-6">
+        <div class="card card-products-overview">
+            <div class="card-body">
+                <div>
+                    <div class="card-products-overview-stat" data-countup-value="{{ data.count_agreements }}">0</div>
+                    <div class="text-muted">Accepted Requests</div>
+                </div>
+                    
+                <div class="icon-rounded home-icon mb-0">
+                    <i class='bx bx-check'></i>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
+
+<div class="row">
+    <!-- account balance -->
+    <div class="col-sm-12 col-md-6">
+        <div class="card card-products-overview">
+            <div class="card-body">
+                <div>
+                    <div class="card-products-overview-stat card-products-overview-stat-balance" data-countup-value="{{ data.lender_balance }}" data-countup-prefix="$" data-countup-decimal-places="2">0</div>
+                    <div class="text-muted">Account balance</div>
+                </div>
+                    
+                <div class="icon-rounded home-icon mb-0">
+                    <i class='bx bx-dollar'></i>
+                </div>
+            </div>
+        </div>
+    </div>   
+
+    <!-- total earnings -->
+    <div class="col-sm-12 col-md-6">
+        <div class="card card-products-overview">
+            <div class="card-body">
+                <div>
+                    <div class="card-products-overview-stat" data-countup-value="{{ data.lender_earnings }}" data-countup-prefix="$" data-countup-decimal-places="2">0</div>
+                    <div class="text-muted">Total Earnings</div>
+                </div>
+                    
+                <div class="icon-rounded home-icon mb-0">
+                    <i class='bx bx-dollar'></i>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+
+
+<button type="button" class="btn btn-secondary mt-3" id="btn-transfer-balance">Transfer your balance</button>
+
+{% endblock %}
+
+
+{% block footer %}
+<script src="/static/js/external/countUp.min.js"></script>
+<script src="/static/js/dist/products-overview.bundle.js"></script>
+{% endblock %}
+
+

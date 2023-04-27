@@ -1,0 +1,196 @@
+{#
+***************************************************************************************************
+
+* Template: results.html
+* URL: /search/products
+* Purpose: View the product search results
+
+***************************************************************************************************
+
+Input parms (data):
+
+* productCategories:
+    - major (list) 
+        - id
+        - name
+    - minor (list) 
+        - id
+        - name
+        - parent_id
+    - sub (list) 
+        - id
+        - name
+        - parent_id
+
+* urlParms:
+    - location_id (required parms)
+    - starts_on (required parms)
+    - ends_on (required parms)
+    - additional...
+
+* products (list):
+    - id
+    - name
+    - description
+    - product_categories_sub_id
+    - product_categories_sub_name
+    - product_categories_minor_id
+    - product_categories_minor_name
+    - product_categories_major_id
+    - product_categories_major_name
+    - price_full
+    - image
+    - minimum_age
+    - user_id
+    - user_name_first
+    - user_name_last
+
+* pagination:
+    - pages:
+        - first
+        - previous
+        - current
+        - next
+        - last
+    - urls:
+        - first
+        - previous
+        - current
+        - next
+        - last
+
+
+***************************************************************************************************
+#}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% include 'includes/header.html' %}
+    <title>Search results</title>
+</head>
+
+<body>
+    {% include 'includes/navbar.html' %}
+
+    <div class="container">
+
+        <div class="d-lg-none mb-3">
+            <div class="d-md-flex justify-content-between mt-4 mt-lg-0">
+                <h3 class="mb-3">Results <span class="badge badge-pill badge-secondary">{{ data.total_records }}</span></h3>
+                <div>
+                    <select class="selectpickr-search-product form-control" title="Sort by" data-width="auto"></select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-lg-5">
+
+            <div class="d-lg-none col-12">
+                <button type="button" class="btn btn-light text-muted w-100 text-left d-flex justify-content-between align-items-center" id="btn-toggle-filters">
+                    <div>Show filters</div>
+                    <div><i class='bx bx-plus'></i></div>
+                </button>
+            </div>
+
+            <!-- sidenav -->
+            <div class="col-sm-12 col-lg-4 mt-3 mt-lg-0 d-none d-lg-block category-column">
+                {% include 'pages/search-products/sidenav.html' %}
+            </div>
+
+
+            <div class="col-sm-12 col-lg-8">
+                <div class="d-lg-flex justify-content-between mt-4 mt-lg-0 d-none d-lg-block">
+                    <h3 class="mb-3 mb-lg-0">Results <span class="badge badge-pill badge-secondary">{{ data.total_records }}</span></h3>
+                    <div>
+                        <select class="selectpickr-search-product form-control" title="Sort by" data-width="auto"></select>
+                    </div>
+                </div>
+
+                <!-- where all the products will be displayed -->
+                <div id="lender-product-listings" class="mt-4">
+
+                    {% for product in data.products %}
+                    <div class="card card-user-product mb-5" data-product-id="{{ product.id }}">
+                        <div class="row no-gutters">
+
+                            <div class="container-imgs col-md-4 col-sm-12 ">
+                                
+                                {% set listingUrl = "/listings/" ~ product.id ~ '?' ~ data.query_string %}
+                                <a href="{{ listingUrl }}" class="h-100 w-100">
+                                    <div class="container-img-pics w-100 h-100" style="background-image: url('{{ product.image }}');"></div>
+                                </a>
+                            </div>
+                            <div class="col-md-8 col-sm-12">
+                                <div class="card-body p-4 h-100">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <h4 class="card-lender-product-detail">{{ product.name }}</h4>
+                                    </div>
+
+                                    <!-- <p class="card-text text-muted">{{ product.location_city }}, {{ product.location_state_id }}</p> -->
+
+                                    <div class="product-rating mb-2">
+                                        <i class='bx bxs-star rating-star rating-star-filled'></i>
+                                        <i class='bx bxs-star rating-star rating-star-filled'></i>
+                                        <i class='bx bxs-star rating-star rating-star-filled'></i>
+                                        <i class='bx bxs-star-half rating-star rating-star-filled'></i>
+                                        <i class='bx bxs-star rating-star'></i>
+                                        <span class="badge badge-pill badge-dark ml-2">3.6</span>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div><small class="text-muted font-weight-light">Full Day</small></div>
+                                            <div class="h5 text-secondary">
+                                                {% if product.price_full %}
+                                                ${{ "{0:.2f}".format(product.price_full) }}
+                                                {% else %}
+                                                &mdash;
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div><small class="text-muted font-weight-light">Category</small></div>
+                                            <div class="h5 text-secondary text-truncate">{{ product.product_categories_sub_name }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination pagination-search-products justify-content-center" data-page-last="{{ data.pagination.pages.last }}">
+                        <li class="page-item page-item-first"><a class="page-link" href="{{ data.pagination.urls.first }}"><i class='bx bx-chevrons-left'></i></a></li>
+                        <li class="page-item page-item-previous"><a class="page-link" href="{{ data.pagination.urls.previous }}"><i class='bx bx-chevron-left'></i></a></li>
+                        <li class="page-item page-item-left"><a class="page-link" href="{{ data.pagination.urls.previous }}">{{ data.pagination.pages.previous }}</a></li>
+                        <li class="page-item page-item-center"><a class="page-link" href="{{ data.pagination.urls.current }}">{{ data.pagination.pages.current }}</a></li>
+                        <li class="page-item page-item-right"><a class="page-link" href="{{ data.pagination.urls.next }}">{{ data.pagination.pages.next }}</a></li>
+                        <li class="page-item page-item-next"><a class="page-link" href="{{ data.pagination.urls.next }}"><i class='bx bx-chevron-right'></i></a></li>
+                        <li class="page-item page-item-last"><a class="page-link" href="{{ data.pagination.urls.last }}"><i class='bx bx-chevrons-right'></i></a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="mb-5"></div>
+
+    {% include 'includes/footer.html' %}
+    
+    <!-- <script src="/static/js/pages/search-products/SidenavCategoryFilter.js"></script>
+    <script src="/static/js/pages/search-products/SortingElement.js"></script>
+    <script src="/static/js/pages/search-products/Pagination.js"></script>
+    <script src="/static/js/pages/search-products/results.js"></script> -->
+
+    <script src="/static/js/dist/search-products-results.bundle.js"></script>
+</body>
+
+</html>
