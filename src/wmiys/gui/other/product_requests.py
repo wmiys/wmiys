@@ -55,6 +55,8 @@ def getSubmitted() -> list[dict]:
         flask.abort(400)
 
     requests = requests_api_response.json()
+
+    print(flask.json.dumps(requests, indent=4))
     
     for request in requests:
         _formatRequestDates(request)

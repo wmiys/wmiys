@@ -20,19 +20,18 @@ class CustomJSONEncoder(DefaultJSONProvider):
 
     @staticmethod
     def default(obj):
-
+        
         try:
-            if isinstance(obj, (date, datetime)):
+            if isinstance(obj, (datetime, date)):
                 return obj.isoformat()
             elif isinstance(obj, Decimal):
                 return float(obj)
             elif isinstance(obj, timedelta):
                 return timedelta.__str__
-            iterable = iter(obj)
         except TypeError:
             pass
-        else:
-            return list(iterable)
-        
+
         return DefaultJSONProvider.default(obj)
+        
+        
         
