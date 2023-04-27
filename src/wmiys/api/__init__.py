@@ -22,7 +22,7 @@ Payments             | /payments
 
 from flask import Flask
 from flask_cors import CORS
-import other
+from wmiys import config
 import pymysql
 from wmiys.api.other import CustomJSONEncoder, images
 from . import routes
@@ -32,16 +32,16 @@ from . import routes
 #----------------------------------------------------------
 def configureApp(flask_app: Flask):
     # set the flask configuration values for either production or development
-    if flask_app.env == "production":
-        flask_app.config.from_object(other.config.Production)
+    if flask_app.debug:
+        flask_app.config.from_object(config.Dev)
     else:
-        flask_app.config.from_object(other.config.Dev)
+        flask_app.config.from_object(config.Production)
 
     # setup the CORS policy
     CORS(flask_app)
 
     # setup the custom encoder for dates
-    flask_app.json_encoder = CustomJSONEncoder
+    flask_app.json_provider_class = CustomJSONEncoder
 
     configureStaticUrl(flask_app)
     configureDatabaseConnection(flask_app)

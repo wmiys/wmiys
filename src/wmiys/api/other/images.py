@@ -13,7 +13,7 @@ import flask
 from werkzeug.datastructures import FileStorage
 
 from wmiys.common import utilities
-from wmiys.common.config import Production as ProductionConfig
+from wmiys.config import Production as ProductionConfig
 
 
 STATIC_URL_PREFIX = f'{ProductionConfig.URL_API}/'

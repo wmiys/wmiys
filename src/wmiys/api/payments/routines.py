@@ -1,5 +1,5 @@
 import stripe
-from wmiys.common import keys
+from wmiys import keys
 from wmiys.common import utilities
 from wmiys.api.other.base_return import BaseReturn
 from wmiys.domain import models

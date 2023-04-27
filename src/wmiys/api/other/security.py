@@ -2,7 +2,7 @@ from __future__ import annotations
 from http.client import responses
 import flask
 from functools import wraps
-from wmiys.common import keys
+from wmiys import keys
 from wmiys.api.services import products as product_services
 from wmiys.api.services import users as user_services
 from wmiys.api.other import responses

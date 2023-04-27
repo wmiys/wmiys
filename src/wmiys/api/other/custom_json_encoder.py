@@ -8,12 +8,18 @@
 #
 #           The solution was found: https://www.javaer101.com/en/article/1732830.html
 #************************************************************************************
-from flask.json import JSONEncoder
+
+from flask.json.provider import DefaultJSONProvider
 from datetime import date
 from decimal import Decimal
 
-class CustomJSONEncoder(JSONEncoder):
-    def default(self, obj):
+class CustomJSONEncoder(DefaultJSONProvider):
+
+    compact = False
+    sort_keys = False
+
+    @staticmethod
+    def default(obj):
         try:
             if isinstance(obj, date):
                 return obj.isoformat()
@@ -24,7 +30,6 @@ class CustomJSONEncoder(JSONEncoder):
             pass
         else:
             return list(iterable)
-
         
-
-        return JSONEncoder.default(self, obj)
+        return DefaultJSONProvider.default(obj)
+        

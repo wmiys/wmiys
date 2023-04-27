@@ -1,6 +1,6 @@
 import flask
 from functools import wraps
-from wmiys.common.config import Production as ConfigProduction
+from wmiys.config import Production as ConfigProduction
 
 
 SESSION_KEY_USER_ID  = 'userID'

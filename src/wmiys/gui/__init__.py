@@ -1,13 +1,13 @@
 import flask
 from flask_cors import CORS
+
 from . import routes
 from .other import security
-from werkzeug.exceptions import HTTPException
-import other
-import wmiys.gui.api_wrapper.base
-import wmiys.gui.other.security
-import wmiys.gui.payments.payout_accounts
-import wmiys.gui.routes.account_settings
+from wmiys import config
+import wmiys.gui.api_wrapper.base as gui_base
+import wmiys.gui.other.security as gui_security
+import wmiys.gui.payments.payout_accounts as gui_payout_accounts
+import wmiys.gui.routes.account_settings as gui_account_settings
 
 
 #----------------------------------------------------------
@@ -15,10 +15,10 @@ import wmiys.gui.routes.account_settings
 #----------------------------------------------------------
 def configure_app(flask_app: flask.Flask):
     # set the flask configuration values for either production or development
-    if flask_app.env == "production":
-        flask_app.config.from_object(other.config.Production)
+    if flask_app.debug:
+        flask_app.config.from_object(config.Dev)
     else:
-        flask_app.config.from_object(other.config.Dev)
+        flask_app.config.from_object(config.Production)
 
     flask_app.secret_key = flask_app.config.get('SECRET_KEY_GUI')
 
@@ -35,10 +35,10 @@ def _set_static_url_values(flask_app: flask.Flask):
     gui_prefix = flask_app.config.get('URL_GUI')
 
     # assign them
-    wmiys.api_wrapper.base.URL_BASE         = api_prefix
-    wmiys.common.security.LOGIN_URL_PREFIX  = gui_prefix
-    wmiys.payments.payout_accounts.URL_BASE = gui_prefix
-    wmiys.routes.account_settings.URL_BASE  = gui_prefix
+    gui_base.URL_BASE             = api_prefix
+    gui_security.LOGIN_URL_PREFIX = gui_prefix
+    gui_payout_accounts.URL_BASE  = gui_prefix
+    gui_account_settings.URL_BASE = gui_prefix
 
 
 #----------------------------------------------------------
