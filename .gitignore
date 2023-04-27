@@ -190,5 +190,8 @@ keys/
 # common
 #-------------------------------------------------------------
 keys/
-**/config/base_configuration.py
+**/config/private.py
+
+
+
 

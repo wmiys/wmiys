@@ -33,9 +33,9 @@ from . import routes
 def configureApp(flask_app: Flask):
     # set the flask configuration values for either production or development
     if flask_app.debug:
-        flask_app.config.from_object(config.Dev)
+        flask_app.config.from_object(config.ConfigDev)
     else:
-        flask_app.config.from_object(config.Production)
+        flask_app.config.from_object(config.ConfigProduction)
 
     # setup the CORS policy
     CORS(flask_app)
