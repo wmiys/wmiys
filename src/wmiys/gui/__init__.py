@@ -16,9 +16,9 @@ import wmiys.gui.routes.account_settings as gui_account_settings
 def configure_app(flask_app: flask.Flask):
     # set the flask configuration values for either production or development
     if flask_app.debug:
-        flask_app.config.from_object(config.Dev)
+        flask_app.config.from_object(config.ConfigDev)
     else:
-        flask_app.config.from_object(config.Production)
+        flask_app.config.from_object(config.ConfigProduction)
 
     flask_app.secret_key = flask_app.config.get('SECRET_KEY_GUI')
 

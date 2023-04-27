@@ -7,7 +7,7 @@
 #*******************************************************************************************
 
 import flask
-from wmiys.config import Production as ConfigProduction
+from wmiys.config import ConfigProduction as ConfigProduction
 from wmiys.gui.api_wrapper import ApiWrapperUsers
 from wmiys.gui.other import security, product_requests
 
